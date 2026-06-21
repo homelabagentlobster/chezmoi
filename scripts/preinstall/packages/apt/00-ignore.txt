@@ -1,0 +1,27 @@
+# Audit-only ignore list — NOT passed to install-list.sh.
+# Packages listed here are suppressed from the audit output in 90-audit-packages.sh
+# because they are system-installed (e.g. ubuntu-minimal, dpkg) and do not need to
+# be declared as user-managed packages.
+#
+# DO NOT add this file to the install calls in 10-packages.sh or profile/*.sh.
+
+bash
+coreutils
+coreutils-from-uutils
+dash
+diffutils
+dpkg
+findutils
+grep
+gzip
+hostname
+init
+libattr1
+ncurses-base
+ncurses-bin
+tar
+ubuntu-minimal
+ubuntu-wsl
+util-linux
+gnu-coreutils
+rust-coreutils

@@ -1,0 +1,25 @@
+[theme]
+name = "dracula"
+parent = "default"
+
+# Colours pulled from the Starship `dracula` palette (dot_config/starship/default.toml)
+# so the history search matches the prompt. Element -> role mapping for atuin's
+# compact list (atuin 18.x, history_list.rs):
+#   Base        command text                       (was plain white)
+#   AlertInfo   duration of a successful command   (green)
+#   AlertError  duration of a failed command + the selected/highlighted row (red, bold)
+#   Guidance    time-ago column + top help bar
+#   Important   "Search | Inspect" tab highlight + accents
+#   Title       "Atuin vX" header
+# The left-hand index numbers are rendered with a hardcoded default style and
+# cannot be themed.
+[colors]
+Title      = "#bd93f9"   # purple header
+Important  = "#ff0090"   # starship pink — tab highlight / accents
+Base       = "#00d0ff"   # command text — starship cyan (no longer plain white)
+Guidance   = "#6272a4"   # time-ago + help bar (muted slate)
+Muted      = "#6272a4"
+Annotation = "#6a00ff"   # starship deep purple
+AlertInfo  = "#50fa7b"   # green  — fast / successful command durations
+AlertWarn  = "#f1fa8c"   # yellow
+AlertError = "#ff5555"   # red    — failed durations + selected row

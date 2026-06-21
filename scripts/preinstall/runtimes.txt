@@ -1,0 +1,9 @@
+node
+npm
+pnpm
+python
+python3
+ruby
+go
+java
+dotnet

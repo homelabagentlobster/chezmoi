@@ -1,0 +1,44 @@
+#!/bin/sh
+# Managed by chezmoi (modify_ script).
+#
+# chezmoi pipes the CURRENT contents of ~/.claude/settings.json into this
+# script on stdin; whatever we print to stdout becomes the new file. We overlay
+# only the keys chezmoi owns onto whatever is already there, so runtime-owned
+# keys that Claude Code rewrites itself (notably "model") are preserved and no
+# longer cause apply churn.
+set -eu
+
+current="$(cat)"
+[ -n "$current" ] || current='{}'
+
+managed='{
+  "hooks": {
+    "PostToolUse": [
+      { "matcher": "Bash", "hooks": [ { "type": "command", "command": "atuin hook claude-code" } ] }
+    ],
+    "PostToolUseFailure": [
+      { "matcher": "Bash", "hooks": [ { "type": "command", "command": "atuin hook claude-code" } ] }
+    ],
+    "PreToolUse": [
+      { "matcher": "Bash", "hooks": [ { "type": "command", "command": "atuin hook claude-code" } ] }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "{{ .chezmoi.homeDir }}/.claude/scripts/statusline.sh",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  },
+  "theme": "custom:dracula",
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
+}'
+
+# Shallow-merge: managed top-level keys win; everything else (e.g. "model")
+# is kept as-is. Seed a default model only when none is present yet.
+printf '%s' "$current" | jq \
+  --argjson managed "$managed" \
+  --arg defaultModel "sonnet" \
+  '. + $managed | .model //= $defaultModel'

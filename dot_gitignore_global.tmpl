@@ -1,0 +1,80 @@
+{{- $profile := .profile | default "" -}}
+{{- with env "CHEZMOI_PROFILE" -}}
+  {{- $profile = . -}}
+{{- end }}
+# Global gitignore patterns
+
+{{ if eq $profile "personal-mac" -}}
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+{{ end -}}
+{{ if eq $profile "work-wsl" -}}
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+Claude.local.md
+
+{{ end -}}
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Editors
+*~
+*.code-workspace
+my_scripts
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*.DotSettings.user
+
+# Postman local/cache metadata
+postman/.postman/
+.postman/
+
+# Misc local files
+*.tmp
+*.temp
+.cache/
+
+# Environment variable files
+.env
+!.env.example
+!.env.sample
+
+# Personal Claude Folder
+.claude
+Claude.local.md
+
+# Certs
+certs/*.pem
+certs/*.pfx
+certs/google_cfa.json

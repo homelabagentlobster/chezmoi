@@ -1,0 +1,39 @@
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
+service_tier = "default"
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."notion@openai-curated"]
+enabled = true
+
+[plugins."superpowers@openai-curated"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[desktop]
+ambient-suggestions-enabled = false
+conversationDetailMode = "STEPS_COMMANDS"
+
+[features]
+js_repl = false
+
+[statusLine]
+type = "command"
+command = "{{ .chezmoi.homeDir }}/.codex/scripts/statusline.sh"
+padding = 0

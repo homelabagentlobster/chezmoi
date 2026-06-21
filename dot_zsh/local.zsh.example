@@ -1,0 +1,15 @@
+# ~/.zsh/local.zsh — machine-specific config, never committed.
+# Copy this file to ~/.zsh/local.zsh and fill in values for the current machine.
+# This file is sourced last, so it can override anything set by shared or profile config.
+
+# Credentials and secrets
+# export GOOGLE_APPLICATION_CREDENTIALS="$HOME/path/to/credentials.json"
+# export SOME_API_KEY="..."
+# export MEDKIT_SQLConnectionString="..."
+
+# Machine-specific PATH additions
+# export PATH="$PATH:$HOME/some/local/bin"
+
+# Local overrides
+# export EDITOR="vim"
+# export STARSHIP_CONFIG_OVERRIDE="$HOME/.config/starship/custom.toml"

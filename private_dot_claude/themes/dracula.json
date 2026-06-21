@@ -1,0 +1,15 @@
+{
+  "name": "dracula",
+  "base": "dark",
+  "overrides": {
+    "syntax-fg":     "#f8f8f2",
+    "syntax-pink":   "#ff79c6",
+    "syntax-purple": "#bd93f9",
+    "syntax-cyan":   "#8be9fd",
+    "syntax-green":  "#50fa7b",
+    "syntax-yellow": "#f1fa8c",
+    "syntax-orange": "#ffb86c",
+    "syntax-error":  "#ff5555",
+    "syntax-gray":   "#6272a4"
+  }
+}

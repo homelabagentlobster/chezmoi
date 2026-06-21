@@ -1,0 +1,6 @@
+curl
+git
+zsh
+fzf
+jq
+make

@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+# package list hashes (triggers rerun on changes):
+{{- range (glob "scripts/preinstall/packages/*/**.txt") }}
+# {{ . }}: {{ include . | sha256sum }}
+{{- end }}
+{{- $profile := .profile | default "" -}}
+{{- with env "CHEZMOI_PROFILE" -}}
+  {{- $profile = . -}}
+{{- end }}
+set -euo pipefail
+
+export CHEZMOI_SOURCE_DIR="{{ .chezmoi.sourceDir }}"
+export PREINSTALL_DIR="$CHEZMOI_SOURCE_DIR/scripts/preinstall"
+
+export PROFILE="{{ $profile }}"
+export OS="{{ .chezmoi.os }}"
+
+log() {
+  printf '\n[preinstall] %s\n' "$*"
+}
+
+run_script() {
+  local script="$1"
+
+  if [[ ! -f "$script" ]]; then
+    return 0
+  fi
+
+  log "Running ${script#$CHEZMOI_SOURCE_DIR/}"
+
+  if [[ -x "$script" ]]; then
+    "$script"
+  else
+    bash "$script"
+  fi
+}
+
+run_folder() {
+  local dir="$1"
+
+  [[ -d "$dir" ]] || return 0
+
+  local script
+  for script in "$dir"/*.sh; do
+    [[ -e "$script" ]] || continue
+    run_script "$script"
+  done
+}
+
+log "OS=$OS"
+log "PROFILE=${PROFILE:-unset}"
+
+run_folder "$PREINSTALL_DIR/shared"
+
+case "$PROFILE" in
+  homelab|homelab-linux)
+    run_script "$PREINSTALL_DIR/profile/homelab.sh"
+    ;;
+  openclaw)
+    run_script "$PREINSTALL_DIR/profile/openclaw.sh"
+    ;;
+  personal-mac)
+    run_script "$PREINSTALL_DIR/profile/personal-mac.sh"
+    ;;
+  work-wsl)
+    run_script "$PREINSTALL_DIR/profile/work-wsl.sh"
+    ;;
+  "")
+    log "No profile set; skipping profile preinstall"
+    ;;
+  *)
+    log "No profile preinstall found for PROFILE=$PROFILE"
+    ;;
+esac

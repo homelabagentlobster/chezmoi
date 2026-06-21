@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# config hash: {{ include "dot_config/mise/config.toml.tmpl" | sha256sum }}
+set -euo pipefail
+
+if command -v mise >/dev/null 2>&1; then
+  mise_bin="$(command -v mise)"
+elif [[ -x "$HOME/.local/bin/mise" ]]; then
+  mise_bin="$HOME/.local/bin/mise"
+else
+  echo "mise not found; skipping tool install"
+  exit 0
+fi
+
+"$mise_bin" install
+"$mise_bin" prune --yes

@@ -1,0 +1,7 @@
+# shellcheck shell=bash
+if [[ -f "$HOME/.zsh/init.zsh" ]]; then
+  # shellcheck disable=SC1091
+  source "$HOME/.zsh/init.zsh"
+else
+  echo "Missing zsh config: ~/.zsh/init.zsh"
+fi

@@ -1,0 +1,145 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+format = """[ ](fg:purple)$os[](fg:purple bg:comment)$username[](fg:comment bg:cyan)$directory$custom\
+($git_branch$git_status)\
+($c$cpp$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context$conda$pixi)
+$character"""
+
+right_format = "$status$cmd_duration$time$battery"
+continuation_prompt = '[▶▶](fg:yellow)'
+
+palette = 'dracula'
+
+[character]
+success_symbol = '[󰜴](bold green)'
+error_symbol = '[󰜴](bold red)'
+
+[palettes.dracula]
+pink = "#ff0090"
+red = "#ff5555"
+yellow = "#f1fa8c"
+green = "#50fa7b"
+blue = "#3300ff"
+purple = "#6a00ff"
+cyan = "#00d0ff"
+comment = "#6272a4"
+mantle = "#181825"
+crust = "#11111b"
+text = "#ffffff"
+
+[os]
+disabled = false
+style = "fg:crust bg:purple"
+format = "[ $symbol ]($style)"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+Macos = "󰀵"
+Linux = "󰌽"
+Amazon = ""
+Android = ""
+
+[username]
+show_always = true
+style_user = "fg:text bg:comment"
+style_root = "fg:red bg:comment"
+format = '[ $user]($style)'
+
+[directory]
+style = "fg:crust bg:cyan"
+format = "[ $path ]($style)"
+truncation_length = 2
+truncation_symbol = " "
+read_only = " "
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Coding" = "󰲋 "
+"~/" = " "
+"~" = ""
+
+[git_branch]
+symbol = ""
+style = "fg:crust bg:pink"
+format = "[](bg:pink fg:cyan)[ $symbol $branch ]($style)"
+
+[git_status]
+style = "fg:crust bg:pink"
+format = "[$all_status$ahead_behind]($style)[](fg:pink)"
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+up_to_date = ""
+conflicted = " ${count} "
+stashed = "󱀇 ${count} "
+modified = " ${count} "
+staged = " ${count} "
+untracked = "󰡯 ${count} "
+renamed = "» ${count} "
+deleted = "✘ ${count} "
+
+[battery]
+disabled = false
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+unknown_symbol = "󰂑 "
+empty_symbol = "󰂎 "
+format = "[](fg:blue bg:mantle)[$symbol$percentage]($style)[](fg:blue)"
+
+[[battery.display]]
+threshold = 20
+style = "fg:red bg:blue"
+
+[[battery.display]]
+threshold = 60
+style = "fg:yellow bg:blue"
+
+[[battery.display]]
+threshold = 100
+style = "fg:green bg:blue"
+
+[[battery.display]]
+threshold = 101
+style = "fg:green bg:blue"
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "fg:text bg:mantle"
+format = "[](fg:mantle bg:mantle)[ $time ](fg:text bg:mantle)"
+
+[cmd_duration]
+show_milliseconds = false
+format = "[](fg:mantle bg:mantle)[ $duration](fg:yellow bg:mantle)[](fg:mantle bg:mantle)"
+style = "fg:yellow bg:mantle"
+disabled = false
+show_notifications = true
+min_time_to_notify = 100
+
+[status]
+disabled = false
+map_symbol = true
+symbol = "[](fg:red)[✘](fg:crust bg:red)[](fg:red bg:mantle)"
+success_symbol = "[](fg:green)[✓](fg:crust bg:green)[](fg:green bg:mantle)"
+not_executable_symbol = "[](fg:yellow)[  ](fg:crust bg:yellow)[](fg:yellow bg:mantle)"
+not_found_symbol = "[](fg:yellow)[  ](fg:crust bg:yellow)[](fg:yellow bg:mantle)"
+sigint_symbol = "[](fg:yellow)[ 󰜺 ](fg:crust bg:yellow)[](fg:yellow bg:mantle)"
+signal_symbol = "[](fg:yellow)[ 󱐋 ](fg:crust bg:yellow)[](fg:yellow bg:mantle)"
+style = "fg:text bg:comment"
+success_style = "fg:crust bg:green"
+failure_style = "fg:crust bg:red"
+format = "$symbol"
+recognize_signal_code = true
+pipestatus = true
+pipestatus_separator = "[|](fg:comment bg:mantle)"
+pipestatus_segment_format = "$symbol"
+pipestatus_format = "$pipestatus"
+
+[custom.dir_end]
+when = "! git rev-parse --is-inside-work-tree > /dev/null 2>&1"
+format = "[](fg:cyan)"

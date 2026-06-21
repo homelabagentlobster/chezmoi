@@ -1,0 +1,17 @@
+# Atuin configuration. See https://docs.atuin.sh/configuration/config/
+# Sync credentials live in ~/.local/share/atuin/ (not committed). Run `atuin login` on new machines.
+
+# Compact UI that feels like a better Ctrl+R.
+style = "compact"
+inline_height = 20
+show_preview = true
+
+# Press Enter to run the selected command immediately (instead of editing it).
+enter_accept = true
+
+# Search across all history by default; fuzzy matching.
+filter_mode = "global"
+search_mode = "fuzzy"
+
+[theme]
+name = "dracula"

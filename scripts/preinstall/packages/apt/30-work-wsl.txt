@@ -1,0 +1,4 @@
+libnss3-tools
+mkcert
+socat
+libicu78
