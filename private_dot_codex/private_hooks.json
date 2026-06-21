@@ -4,7 +4,7 @@
       {
         "hooks": [
           {
-            "command": "atuin hook codex",
+            "command": "command -v atuin >/dev/null 2>&1 && atuin hook codex || true",
             "type": "command"
           }
         ],
@@ -15,18 +15,7 @@
       {
         "hooks": [
           {
-            "command": "atuin hook codex",
-            "type": "command"
-          }
-        ],
-        "matcher": "^Bash$"
-      }
-    ],
-    "PreToolUse": [
-      {
-        "hooks": [
-          {
-            "command": "atuin hook codex",
+            "command": "command -v atuin >/dev/null 2>&1 && atuin hook codex || true",
             "type": "command"
           }
         ],
