@@ -1,4 +1,1 @@
-zoxide
 ripgrep
-fd-find
-keychain

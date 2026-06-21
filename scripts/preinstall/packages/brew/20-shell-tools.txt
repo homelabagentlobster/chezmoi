@@ -3,3 +3,4 @@ fd
 bat
 zoxide
 starship
+keychain

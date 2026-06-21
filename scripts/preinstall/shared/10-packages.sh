@@ -11,6 +11,9 @@ case "$(uname -s)" in
     else
       echo "No supported Linux package manager found"
     fi
+    if command -v brew >/dev/null 2>&1 && [[ -f "$PREINSTALL_DIR/packages/brew/30-linux-user-tools.txt" ]]; then
+      bash "$PREINSTALL_DIR/packages/brew/install-list.sh" "$PREINSTALL_DIR/packages/brew/30-linux-user-tools.txt"
+    fi
     ;;
   Darwin)
     if command -v brew >/dev/null 2>&1; then
