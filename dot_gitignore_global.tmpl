@@ -1,24 +1,5 @@
-{{- $profile := .profile | default "" -}}
-{{- with env "CHEZMOI_PROFILE" -}}
-  {{- $profile = . -}}
-{{- end }}
 # Global gitignore patterns
 
-{{ if eq $profile "personal-mac" -}}
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-{{ end -}}
-{{ if eq $profile "work-wsl" -}}
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-Claude.local.md
-
-{{ end -}}
 # Node
 node_modules/
 npm-debug.log*

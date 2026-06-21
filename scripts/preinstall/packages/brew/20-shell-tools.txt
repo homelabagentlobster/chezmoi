@@ -1,5 +1,0 @@
-ripgrep
-fd
-bat
-zoxide
-starship

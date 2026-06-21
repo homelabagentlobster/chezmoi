@@ -1,6 +1,0 @@
-git
-zsh
-curl
-jq
-fzf
-mise

@@ -1,13 +1,5 @@
-{{- $profile := .profile | default "" -}}
-{{- with env "CHEZMOI_PROFILE" -}}
-  {{- $profile = . -}}
-{{- end -}}
 [tools]
 atuin = "latest"
 eza = "latest"
 node = "latest"
 python = "latest"
-{{ if and (ne $profile "homelab") (ne $profile "openclaw") -}}
-dotnet = "latest"
-pnpm = "latest"
-{{ end -}}

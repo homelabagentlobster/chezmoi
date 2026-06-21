@@ -2,7 +2,7 @@ alias zshconfig="code ~/.zsh"
 alias zshrc="code ~/.zshrc"
 alias reload="source ~/.zshrc"
 
-alias gc="git commit"  # OMZ gc is --verbose; work-wsl overrides with gitmoji
+alias gc="git commit"  # OMZ gc is --verbose.
 alias glog="git log --oneline --graph --decorate --all"  # OMZ gl=git pull
 
 # On Debian/Ubuntu fd ships as fdfind.
@@ -10,10 +10,6 @@ alias glog="git log --oneline --graph --decorate --all"  # OMZ gl=git pull
 
 if (( ${+commands[eza]} )); then
   alias tree="eza --tree --icons"  # OMZ eza plugin handles ls/la/ll via zstyles
-fi
-
-if [[ "$DOTFILES_OS" == "macos" ]]; then
-  alias buou="brew update && brew outdated && brew upgrade && brew cleanup"
 fi
 
 starship-test() {

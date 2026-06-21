@@ -2,6 +2,10 @@
 
 OpenClaw-only dotfiles managed with chezmoi.
 
+This repo is the source of truth for the OpenClaw shell bootstrap and managed
+agent configuration. It is intentionally narrower than the general dotfiles repo
+it came from.
+
 ## Install
 
 Install chezmoi:
@@ -13,7 +17,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)"
 Initialize:
 
 ```sh
-chezmoi init git@github.com:Oli-Ward/openclaw-dotfiles.git
+chezmoi init git@github.com:homelabagentlobster/chezmoi.git
 ```
 
 Preview:
@@ -30,6 +34,22 @@ Apply after reviewing the diff:
 chezmoi apply --verbose
 ```
 
+The repo defaults to the `openclaw` chezmoi profile in `.chezmoi.toml.tmpl`.
+Override it only for one-off debugging with `CHEZMOI_PROFILE=openclaw`.
+
+## What It Manages
+
+- OpenClaw zsh config under `~/.zsh`
+- Global git config and ignore rules
+- Atuin, Starship, and mise config
+- Linux apt bootstrap package lists for the OpenClaw host
+- OpenClaw profile aliases, completion loading, and local secret sourcing
+- Claude config, commands, skills, theme, hooks, and statusline
+- Codex config, instructions, hooks, skills, plugins, and statusline
+
+The bootstrap installs a small Linux package set, zinit, and mise-managed tools.
+It no longer carries macOS, WSL, homelab, or personal-machine profile branches.
+
 ## Secrets
 
 Do not commit secrets.
@@ -44,8 +64,14 @@ Keep these local:
 - API tokens
 - `.env` files
 
-## Managed Agent Config
+## Unmanaged Runtime State
 
-This repo manages reviewed Claude config plus root/global Codex config, commands, skills, hooks, and statusline scripts.
+This repo does not manage runtime history, session logs, sqlite state, plugin
+caches, attachments, worktrees, generated packages, browser state, or auth files.
 
-It does not manage runtime history, session logs, sqlite state, plugin caches, attachments, worktrees, or auth files.
+For changes, edit the chezmoi source files in this repo and verify before
+applying:
+
+```sh
+chezmoi diff
+```
