@@ -4,7 +4,7 @@
       {
         "hooks": [
           {
-            "command": "command -v atuin >/dev/null 2>&1 && atuin hook codex || true",
+            "command": "PATH=\"$HOME/bin:$HOME/.local/share/mise/shims:$PATH\"; command -v atuin >/dev/null 2>&1 && atuin hook codex || true",
             "type": "command"
           }
         ],
@@ -15,7 +15,7 @@
       {
         "hooks": [
           {
-            "command": "command -v atuin >/dev/null 2>&1 && atuin hook codex || true",
+            "command": "PATH=\"$HOME/bin:$HOME/.local/share/mise/shims:$PATH\"; command -v atuin >/dev/null 2>&1 && atuin hook codex || true",
             "type": "command"
           }
         ],
