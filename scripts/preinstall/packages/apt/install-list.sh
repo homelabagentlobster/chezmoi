@@ -17,6 +17,12 @@ if (( ${#missing[@]} == 0 )); then
   exit 0
 fi
 
+if ! command -v sudo >/dev/null 2>&1 || ! sudo -n true >/dev/null 2>&1; then
+  echo "Missing packages from $(basename "$list_file"): ${missing[*]}"
+  echo "Skipping apt install; sudo is unavailable or cannot elevate without a password."
+  exit 0
+fi
+
 echo "Installing: ${missing[*]}"
 sudo apt-get update -qq
 sudo apt-get install -y "${missing[@]}"
