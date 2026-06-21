@@ -2,35 +2,36 @@
 
 add_newline = true
 
-format = """[ ](fg:purple)$os[](fg:purple bg:comment)$username[](fg:comment bg:cyan)$directory$custom\
+format = """[](fg:orange)$username[](fg:orange bg:green)$directory$custom\
 ($git_branch$git_status)\
 ($c$cpp$rust$golang$nodejs$php$java$kotlin$haskell$python$docker_context$conda$pixi)
 $character"""
 
-right_format = "$status$cmd_duration$time$battery"
+right_format = "$status$cmd_duration$time"
 continuation_prompt = '[▶▶](fg:yellow)'
 
-palette = 'dracula'
+palette = 'crustacean_noir'
 
 [character]
 success_symbol = '[󰜴](bold green)'
 error_symbol = '[󰜴](bold red)'
 
-[palettes.dracula]
-pink = "#ff0090"
-red = "#ff5555"
-yellow = "#f1fa8c"
-green = "#50fa7b"
-blue = "#3300ff"
-purple = "#6a00ff"
-cyan = "#00d0ff"
-comment = "#6272a4"
-mantle = "#181825"
-crust = "#11111b"
-text = "#ffffff"
+[palettes.crustacean_noir]
+pink = "#ff4fa3"
+red = "#ff5c57"
+orange = "#ff8a3d"
+yellow = "#ffd166"
+green = "#7bd88f"
+blue = "#4ea1ff"
+purple = "#9d7cff"
+cyan = "#35d3d8"
+comment = "#7a8ca6"
+mantle = "#101820"
+crust = "#071018"
+text = "#f4f7fb"
 
 [os]
-disabled = false
+disabled = true
 style = "fg:crust bg:purple"
 format = "[ $symbol ]($style)"
 
@@ -44,12 +45,12 @@ Android = ""
 
 [username]
 show_always = true
-style_user = "fg:text bg:comment"
+style_user = "fg:crust bg:orange"
 style_root = "fg:red bg:comment"
-format = '[ $user]($style)'
+format = '[󰚩 $user]($style)'
 
 [directory]
-style = "fg:crust bg:cyan"
+style = "fg:crust bg:green"
 format = "[ $path ]($style)"
 truncation_length = 2
 truncation_symbol = " "
@@ -64,12 +65,12 @@ read_only = " "
 
 [git_branch]
 symbol = ""
-style = "fg:crust bg:pink"
-format = "[](bg:pink fg:cyan)[ $symbol $branch ]($style)"
+style = "fg:crust bg:purple"
+format = "[](bg:purple fg:green)[ $symbol $branch ]($style)"
 
 [git_status]
-style = "fg:crust bg:pink"
-format = "[$all_status$ahead_behind]($style)[](fg:pink)"
+style = "fg:crust bg:purple"
+format = "[$all_status$ahead_behind]($style)[](fg:purple)"
 ahead = "⇡${count} "
 behind = "⇣${count} "
 diverged = "⇕⇡${ahead_count}⇣${behind_count} "
@@ -89,34 +90,35 @@ charging_symbol = "󰂄 "
 discharging_symbol = "󰂃 "
 unknown_symbol = "󰂑 "
 empty_symbol = "󰂎 "
-format = "[](fg:blue bg:mantle)[$symbol$percentage]($style)[](fg:blue)"
+format = "[](fg:purple bg:mantle)[$symbol$percentage]($style)[](fg:purple)"
 
 [[battery.display]]
 threshold = 20
-style = "fg:red bg:blue"
+style = "fg:red bg:purple"
 
 [[battery.display]]
 threshold = 60
-style = "fg:yellow bg:blue"
+style = "fg:yellow bg:purple"
 
 [[battery.display]]
 threshold = 100
-style = "fg:green bg:blue"
+style = "fg:green bg:purple"
 
 [[battery.display]]
 threshold = 101
-style = "fg:green bg:blue"
+style = "fg:green bg:purple"
 
 [time]
 disabled = false
 time_format = "%H:%M"
-style = "fg:text bg:mantle"
-format = "[](fg:mantle bg:mantle)[ $time ](fg:text bg:mantle)"
+utc_time_offset = "+12"
+style = "fg:crust bg:cyan"
+format = "[](fg:cyan bg:mantle)[ $time ](fg:crust bg:cyan)[](fg:cyan)"
 
 [cmd_duration]
 show_milliseconds = false
-format = "[](fg:mantle bg:mantle)[ $duration](fg:yellow bg:mantle)[](fg:mantle bg:mantle)"
-style = "fg:yellow bg:mantle"
+format = "[](fg:mantle bg:mantle)[ $duration](fg:orange bg:mantle)[](fg:mantle bg:mantle)"
+style = "fg:orange bg:mantle"
 disabled = false
 show_notifications = true
 min_time_to_notify = 100
@@ -127,7 +129,7 @@ map_symbol = true
 symbol = "[](fg:red)[✘](fg:crust bg:red)[](fg:red bg:mantle)"
 success_symbol = "[](fg:green)[✓](fg:crust bg:green)[](fg:green bg:mantle)"
 not_executable_symbol = "[](fg:yellow)[  ](fg:crust bg:yellow)[](fg:yellow bg:mantle)"
-not_found_symbol = "[](fg:yellow)[  ](fg:crust bg:yellow)[](fg:yellow bg:mantle)"
+not_found_symbol = "[](fg:yellow)[ ? ](fg:crust bg:yellow)[](fg:yellow bg:mantle)"
 sigint_symbol = "[](fg:yellow)[ 󰜺 ](fg:crust bg:yellow)[](fg:yellow bg:mantle)"
 signal_symbol = "[](fg:yellow)[ 󱐋 ](fg:crust bg:yellow)[](fg:yellow bg:mantle)"
 style = "fg:text bg:comment"
@@ -142,4 +144,4 @@ pipestatus_format = "$pipestatus"
 
 [custom.dir_end]
 when = "! git rev-parse --is-inside-work-tree > /dev/null 2>&1"
-format = "[](fg:cyan)"
+format = "[](fg:green)"
