@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # package list hashes (triggers rerun on changes):
-{{- range (glob "scripts/preinstall/packages/*/**.txt") }}
+{{- range list "scripts/preinstall/packages/apt/00-ignore.txt" "scripts/preinstall/packages/apt/10-base.txt" "scripts/preinstall/packages/apt/20-shell-tools.txt" }}
 # {{ . }}: {{ include . | sha256sum }}
 {{- end }}
 {{- $profile := .profile | default "" -}}
@@ -53,22 +53,14 @@ log "PROFILE=${PROFILE:-unset}"
 run_folder "$PREINSTALL_DIR/shared"
 
 case "$PROFILE" in
-  homelab|homelab-linux)
-    run_script "$PREINSTALL_DIR/profile/homelab.sh"
-    ;;
   openclaw)
     run_script "$PREINSTALL_DIR/profile/openclaw.sh"
     ;;
-  personal-mac)
-    run_script "$PREINSTALL_DIR/profile/personal-mac.sh"
-    ;;
-  work-wsl)
-    run_script "$PREINSTALL_DIR/profile/work-wsl.sh"
-    ;;
   "")
-    log "No profile set; skipping profile preinstall"
+    log "No profile set; defaulting to openclaw preinstall"
+    run_script "$PREINSTALL_DIR/profile/openclaw.sh"
     ;;
   *)
-    log "No profile preinstall found for PROFILE=$PROFILE"
+    log "Unsupported profile for this repo: PROFILE=$PROFILE"
     ;;
 esac

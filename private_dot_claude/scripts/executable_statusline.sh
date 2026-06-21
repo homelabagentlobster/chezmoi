@@ -2,7 +2,7 @@
 set -eu
 
 # Dracula palette (ANSI 24-bit where possible, falling back gracefully)
-# These match the Starship work-wsl.toml palette exactly.
+# These match the managed Starship Dracula palette.
 PURPLE='\033[38;2;106;0;255m'    # #6a00ff
 PINK='\033[38;2;255;0;144m'      # #ff0090
 CYAN='\033[38;2;0;208;255m'      # #00d0ff

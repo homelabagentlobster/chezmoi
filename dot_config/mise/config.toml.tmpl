@@ -1,7 +1,3 @@
-{{- $profile := .profile | default "" -}}
-{{- with env "CHEZMOI_PROFILE" -}}
-  {{- $profile = . -}}
-{{- end -}}
 [tools]
 atuin = "latest"
 eza = "latest"

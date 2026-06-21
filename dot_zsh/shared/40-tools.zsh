@@ -1,4 +1,4 @@
-# Cross-platform tools.
+# Shared OpenClaw tools.
 
 # zoxid
 if command -v zoxide >/dev/null 2>&1; then

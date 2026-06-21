@@ -1,22 +1,2 @@
-{{- $profile := .profile | default "" -}}
-{{- with env "CHEZMOI_PROFILE" -}}
-  {{- $profile = . -}}
-{{- end }}
-{{- if eq .chezmoi.os "darwin" -}}
 # shellcheck shell=bash
-# Homebrew - macOS only
-if [[ -x /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -x /usr/local/bin/brew ]]; then
-  eval "$(/usr/local/bin/brew shellenv)"
-fi
-
-# macOS Python.org install
-if [[ -d /Library/Frameworks/Python.framework/Versions/3.13/bin ]]; then
-  export PATH="/Library/Frameworks/Python.framework/Versions/3.13/bin:$PATH"
-fi
-{{- end }}
-
-{{- if eq $profile "work-wsl" }}
-export PATH="$HOME/.local/share/mise/shims:$PATH"
-{{- end }}
+# OpenClaw login-shell setup belongs in ~/.zshrc and ~/.zsh/profile/openclaw.zsh.

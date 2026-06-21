@@ -16,7 +16,6 @@ installed=0
 missing=0
 
 check_apt() { dpkg -s "$1" >/dev/null 2>&1; }
-check_brew() { brew list --formula "$1" >/dev/null 2>&1; }
 
 audit_list() {
   local file="$1"
@@ -46,17 +45,8 @@ case "$(uname -s)" in
       [[ -f "$f" ]] && audit_list "$f" check_apt
     done
     ;;
-  Darwin)
-    if ! command -v brew >/dev/null 2>&1; then
-      echo "brew not found; cannot audit brew packages"
-      exit 1
-    fi
-    for f in "$PREINSTALL_DIR"/packages/brew/*.txt; do
-      [[ -f "$f" ]] && audit_list "$f" check_brew
-    done
-    ;;
   *)
-    echo "Unsupported OS: $(uname -s)"
+    echo "Unsupported OS for OpenClaw package audit: $(uname -s)"
     exit 1
     ;;
 esac

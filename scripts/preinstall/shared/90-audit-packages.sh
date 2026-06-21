@@ -58,27 +58,11 @@ audit_apt() {
   comm -23 "$installed_file" "$managed_file" | print_undeclared "apt — manually installed but not in preinstall lists"
 }
 
-audit_brew() {
-  if ! command -v brew >/dev/null 2>&1; then
-    return 0
-  fi
-
-  collect_managed_packages brew > "$managed_file"
-
-  # brew leaves = explicitly installed formulae that are not dependencies of other installed formulae
-  brew leaves | sort -u > "$installed_file"
-
-  comm -23 "$installed_file" "$managed_file" | print_undeclared "brew — manually installed but not in preinstall lists"
-}
-
 case "$(uname -s)" in
   Linux)
     audit_apt
     ;;
-  Darwin)
-    audit_brew
-    ;;
   *)
-    echo "No package audit configured for $(uname -s)"
+    echo "No OpenClaw package audit configured for $(uname -s)"
     ;;
 esac

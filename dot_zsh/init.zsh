@@ -22,15 +22,8 @@ _zsh_source() {
 
 # Detect OS/environment.
 case "$(uname -s)" in
-  Darwin)
-    export DOTFILES_OS="macos"
-    ;;
   Linux)
-    if grep -qi microsoft /proc/version 2>/dev/null; then
-      export DOTFILES_OS="wsl"
-    else
-      export DOTFILES_OS="linux"
-    fi
+    export DOTFILES_OS="linux"
     ;;
   *)
     export DOTFILES_OS="unknown"
@@ -42,22 +35,11 @@ for config in "$ZSH_CONFIG_DIR"/shared/[0-9][0-9]-*.zsh; do
   [[ -f "$config" ]] && _zsh_source "$config"
 done
 
-# Load profile (set by chezmoi template, or fall back to hostname detection).
+# Load profile (set by chezmoi template, or fall back to OpenClaw).
 [[ -f "$ZSH_CONFIG_DIR/profile.sh" ]] && _zsh_source "$ZSH_CONFIG_DIR/profile.sh"
 
-# If profile not set by chezmoi, detect from hostname.
 if [[ -z "${PROFILE:-}" ]]; then
-  profile_hostname="$(hostname | tr '[:upper:]' '[:lower:]')"
-  PROFILE="personal-mac"
-  if [[ "$profile_hostname" == *openclaw* ]]; then
-    PROFILE="openclaw"
-  elif [[ "$profile_hostname" == *ubuntu* || "$profile_hostname" == *homelab* || "$profile_hostname" == *docker* ]]; then
-    PROFILE="homelab"
-  elif [[ "$profile_hostname" == *wsl* || "$profile_hostname" == *work* ]]; then
-    PROFILE="work-wsl"
-  elif [[ "$profile_hostname" == *mac* || "$profile_hostname" == *mbp* ]]; then
-    PROFILE="personal-mac"
-  fi
+  PROFILE="openclaw"
 fi
 export PROFILE
 
