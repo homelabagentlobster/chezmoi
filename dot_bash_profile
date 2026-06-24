@@ -1,0 +1,12 @@
+# Redirect interactive bash login sessions to zsh.
+case "$-" in
+  *i*)
+    if [ -z "${OPENCLAW_STAY_IN_BASH:-}" ] && command -v zsh >/dev/null 2>&1; then
+      exec zsh -l
+    fi
+    ;;
+esac
+
+if [ -f "$HOME/.profile" ]; then
+  . "$HOME/.profile"
+fi
