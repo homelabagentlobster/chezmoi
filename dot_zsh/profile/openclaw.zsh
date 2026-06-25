@@ -22,6 +22,9 @@ fi
 
 # OpenClaw service helpers
 alias openclaw-start='rbw unlock && bash ~/.openclaw/workspace/execution/openclaw-start.sh'
+alias openclaw-restart='/home/openclaw/.openclaw/workspace/tools/bin/openclaw-restart'
+alias openclaw-stop='/home/openclaw/.openclaw/workspace/tools/bin/openclaw-stop'
+alias openclaw-status='/home/openclaw/.openclaw/workspace/tools/bin/openclaw-status'
 alias openclaw-with-secrets='/home/openclaw/.openclaw/workspace/tools/bin/openclaw-with-secrets'
 alias openclaw-doctor='/home/openclaw/.openclaw/workspace/tools/bin/openclaw-doctor'
 
