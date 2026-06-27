@@ -1,0 +1,4 @@
+interface:
+  display_name: "Linear Issue Workflow"
+  short_description: "Run Linear issues through plan, Git, and status"
+  default_prompt: "Use $linear-issue-workflow to pick up and complete a Linear issue."
